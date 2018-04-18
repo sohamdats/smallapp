@@ -1,0 +1,12 @@
+web:
+    build: .
+    command: python app.py
+    volumes:
+     - .:/data
+    ports:
+     - "8800:8800"
+    links:
+     - db
+db:
+    image: "redis:latest"
+    

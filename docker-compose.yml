@@ -1,0 +1,10 @@
+version: '3'
+services:
+    web:
+        build: .
+        command: python app.py
+        ports:
+        - "8800:8800"
+    redis:
+        image: "redis:alpine"
+    
