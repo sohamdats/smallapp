@@ -15,7 +15,7 @@ def index():
 
 @app.route('/<name>',methods=['GET'])
 def search(name):
-    return 'Not Found' if d.is_reserved(name) == False else 'Found'
+    return 'Not Found' if d.is_reserved(name) == False else d.is_reserved(name)
 
 @app.route('/reserve',methods=['POST'])
 def reserve():
@@ -23,8 +23,7 @@ def reserve():
         user=request.values.get('user')
         minutes=request.values.get('minutes')
         device=request.values.get('device')
-        time = datetime.datetime.now().strftime("%d/%m/%y at %H:%M:%S")
-        d.store(device,user,minutes,time)
+        d.store(device,user,minutes)
     return redirect(url_for('index'))
 
 @app.context_processor
