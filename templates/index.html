@@ -7,6 +7,10 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <title>Reserve</title>
     <script>
+      function show(name){
+      $("#detail"+name).modal('toggle');
+      }
+      
     function check(name){
      var server_url = 'localhost:8800/'+ name;
      $.ajax({
@@ -24,7 +28,7 @@
       }
        })
         }
-
+     
     $(function(){
     $(".dropdown-menu li a").click(function(){
       $(".minutesButton").text($(this).text());
@@ -41,18 +45,20 @@
       <table class="table table-bordered">
 	<thead>
 	  <tr>
-	    <th>Device</th>
+	    <th>Element</th>
+	    <th>Details</th>
 	    <th>Reserve</th>
 	    <th>State</th>
 	  </tr>	 
 	</thead>
 	<tbody>
-	  {% for device,device_state in devices.items() %}
+	  {% for element,element_state in elements.items() %}
 	  <tr>
-	    <td class="col-md-6">{{ device }}</td>
-	    <td class="col-md-1"><a href="#" onclick="check('{{device}}')"><span class="glyphicon glyphicon-plus-sign"></span></a></td>
-	    {% if device_state.user != None %}
-	    <td class="col-md-5">Reserved by {{device_state.user}} for {{ device_state.minutes }} mins on {{device_state.time}}</td>
+	    <td class="col-md-5">{{ element }}</td>
+	    <td class="col-md-1"><a href="#" onclick="show('{{element}}')"><span class="glyphicon glyphicon-info-sign"></span></td>
+	    <td class="col-md-1"><a href="#" onclick="check('{{element}}')"><span class="glyphicon glyphicon-plus-sign"></span></a></td>
+	    {% if element_state.user != None %}
+	    <td class="col-md-5">Reserved by {{element_state.user}} for {{ element_state.minutes }} mins on {{element_state.time}}</td>
 	    {% else %}
 	    <td class="col-md-5">Not reserved</td>
 	    {% endif %}
@@ -61,24 +67,25 @@
 	</tbody>
       </table>      
     </div>
-    {% for device,device_state in devices.items() %}
-    <div id="{{device}}" class="modal fade" role="dialog">
+    {% for element,element_state in elements.items() %}
+    <div id="{{element}}" class="modal fade" role="dialog">
       <div class="modal-dialog">
 	<!-- Modal content-->
 	<div class="modal-content">
 	  <div class="modal-header">
 	    <button type="button" class="close" data-dismiss="modal">&times;</button>
-	    <h4 class="modal-title">Details</h4>
+	    <h4 class="modal-title text-center">{{ element }}</h4>
 	  </div>
 	  <div class="modal-body">
 	    <form class="form-horizontal" action="/reserve" method="post">
-	      <div class="form-group">
-		<label class="control-label col-sm-2" for="device">Device:</label>
+	      <input type="hidden" value="{{element}}" name="element"/>
+	 <!--    <div class="form-group">
+		<label class="control-label col-sm-2" for="device">Element:</label>
 		<div class="col-sm-10">
-		  <input type="hidden" value="{{device}}" name="device"/>
-		  <p class="form-control-static">{{ device }}</p>
+		  <input type="hidden" value="{{element}}" name="element"/>
+		  <p class="form-control-static">{{ element }}</p>
 		</div>
-	      </div>
+	      </div> -->
 	      <div class="form-group">
 		<label class="control-label col-sm-2" for="user">Name:</label>
 		<div class="col-sm-10">
@@ -104,26 +111,6 @@
 		</div>
 		
 	      </div>
-	      
-	      
-	      <!--
-	      <div class="form-group">
-		<label class="control-label col-sm-2" for="minutes">Time:</label>
-		<div class="dropdown col-sm-3">
-		  <button class="btn dropdown-toggle minutesButton" type="button" data-toggle="dropdown">Minutes
-		    <span class="caret"></span></button>
-		  <input class="minutesValue" type="hidden" name="minutes" required>
-		  <ul class="dropdown-menu col-sm-3">
-		    <li><a href="#">30</a></li>
-		    <li><a href="#">45</a></li>
-		    <li><a href="#">60</a></li>
-		    <li><a href="#">75</a></li>
-		    <li><a href="#">90</a></li>
-		    <li><a href="#">105</a></li>
-		    <li><a href="#">120</a></li>
-		  </ul>
-		</div>
-	      </div> -->
 	      <div class="form-group">
 		<div class="col-sm-offset-2 col-sm-10">
 		  <button type="submit" class="btn btn-default">Reserve</button>
@@ -135,7 +122,37 @@
 	</div>
       </div>
     </div>
-      {% endfor %}
+    <div id="detail{{element}}" class="modal fade" role="dialog">
+      <div class="modal-dialog">     
+	<div class="modal-content">
+	  <div class="modal-header">
+	    <button type="button" class="close" data-dismiss="modal">&times;</button>
+	    <h4 class="modal-title text-center">{{element}}</h4>
+	  </div>
+	  <div class="modal-body">
+            <table class="table table-bordered">
+	      <thead>
+		<tr>
+		  <th>Role</th>
+		  <th>IP Address</th>
+		  <th>Credentials</th>
+		  <th>Device</th>
+		</tr>
+	      </thead>
+	      <tbody>
+		{% autoescape false %}
+		<td>{{element_state['Role']}}</td>
+		<td>{{element_state['IP Address']}}</td>
+		<td>{{element_state['Credentials']}}</td>
+		<td>{{element_state['Device']}}</td>
+		{% endautoescape %}
+	      </tbody>
+	    </table>
+	  </div>
+	</div>
+      </div>
+    </div>
+    {% endfor %}
   </body>
   
 </html>

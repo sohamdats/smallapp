@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  </head>
+
+  <body>
+    <div class="container">
+      <table class="table table-bordered">
+	<thead>
+	  <tr>
+	    <th>Element</th>
+	    <th>IP Address</th>
+	    <th>Credentials</th>
+	    <th>Device</th>
+	  </tr>
+	</thead>
+	<tbody>
+	  {% for ele,elep in e.items()%}
+	  <td>ele</td>
+	  <td>elep['Ip Address']</td>
+	  <td>elep['Credentials']</td>
+	  <td>elepp['Device']</td>
+	  {% endfor %}
+	</tbody>
+      </table>
+      
+    </div>
+  </body>
+</html

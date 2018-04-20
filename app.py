@@ -2,16 +2,25 @@ from flask import Flask,request,render_template,redirect,url_for
 import redis
 import datetime
 from db import DB
+import json
 
 app = Flask(__name__)
 r = redis.Redis(host='localhost',port=6379)
 d = DB()
 
+
 @app.route('/')
 def index():
-    devices= ['xTR-1','MS-BR1','WLC-1','WLC-2','AP-1','AP-2','APIC-EM','ME']
-    d.store_devices(devices)
-    return render_template('index.html',devices=d.get_device_states())
+    
+    e_data = json.load(open('elements.json'),strict=False)
+    for element,ele_p in e_data.items():
+        d.store_element(element)
+        d.store_eprop(element,'Role',ele_p['Role'])
+        d.store_eprop(element,'IP Address',ele_p['IP Address'])
+        d.store_eprop(element,'Credentials',ele_p['Credentials'])
+        d.store_eprop(element,'Device',ele_p['Device'])
+    
+    return render_template('index.html',elements=d.get_element_states())
 
 @app.route('/<name>',methods=['GET'])
 def search(name):
@@ -22,8 +31,9 @@ def reserve():
     if request.method == "POST":
         user=request.values.get('user')
         minutes=request.values.get('minutes')
-        device=request.values.get('device')
-        d.store(device,user,minutes)
+        element=request.values.get('element')
+        d.store(element,user,minutes)
+        print(element,user,minutes)
     return redirect(url_for('index'))
 
 @app.context_processor
