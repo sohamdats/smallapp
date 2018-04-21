@@ -46,6 +46,7 @@
 	<thead>
 	  <tr>
 	    <th>Element</th>
+	    <th>IP Address</th>
 	    <th>Details</th>
 	    <th>Reserve</th>
 	    <th>State</th>
@@ -54,7 +55,8 @@
 	<tbody>
 	  {% for element,element_state in elements.items() %}
 	  <tr>
-	    <td class="col-md-5">{{ element }}</td>
+	    <td class="col-md-2">{{ element }}</td>
+	    <td class="col-md-3">{{ element_state["IP"] }}</td>
 	    <td class="col-md-1"><a href="#" onclick="show('{{element}}')"><span class="glyphicon glyphicon-info-sign"></span></td>
 	    <td class="col-md-1"><a href="#" onclick="check('{{element}}')"><span class="glyphicon glyphicon-plus-sign"></span></a></td>
 	    {% if element_state.user != None %}

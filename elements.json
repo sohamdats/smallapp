@@ -2,6 +2,8 @@
     "xTR-1":{
 
 	"Role":"Fabric Edge router",
+
+	"IP":"10.225.117.184",
 	
         "IP Address":"Console access:\n\ntelnet 10.64.69.160 port: 2006\n\nManagement IP address:\n10.225.117.184\n\n\nDHCP pool for 
 AP/Wireless clients:\n9.10.41.0/255.255.255.0 VLAN 41\n\n\nDHCP pool for Wired Clients:\n9.10.42.0/255.255.255.0 VLAN 42\n\n\nInterface
@@ -17,6 +19,8 @@ AP/Wireless clients:\n9.10.41.0/255.255.255.0 VLAN 41\n\n\nDHCP pool for Wired C
 
 	"Role":"Fabric Border router and Map server co-resident",
 
+	"IP":"0.225.117.32",
+	
 	"IP Address":"Console access:\n\ntelnet 10.64.69.160 port: 2005\n\nManagement IP address:\n10.225.117.32\n\n\nInterface IP 
 towards xTR-1:\n9.10.43.1/255.255.255.252\n\n\nOSPF Area 0 Loopback address:\n4.4.4.4\n\n\nInterface towards 
 WLC :\n9.10.45.1/255.255.255.0 VLAN 45",
@@ -30,7 +34,9 @@ WLC :\n9.10.45.1/255.255.255.0 VLAN 45",
     "WLC-1":{
 
 	"Role":"Wireless LAN Controller - Appliance",
-
+     
+        "IP":"9.10.45.10",
+	
 	"IP Address":"Console access:\n\ntelnet 10.64.69.160 port: 2002\n\n\nService Port : 10.225.117.68\n\n\nWLC 
 Mgmt interface IP:\n9.10.45.10 VLAN 45\n\n\nSNMP v2 enabled",
 
@@ -45,6 +51,8 @@ Connected to border 3/0/3",
 
 	"Role":"Wireless LAN Controller - Appliance",
 
+        "IP":"10.64.69.160:2007",
+	
 	"IP Address":"Console access:\n\ntelnet\n10.64.69.160 port: 2007\n\n\nService Port :\n10.225.117.49",
 
 	"Credentials":"username: admin\n\npassword: Cisco123!\n\nConnected to border 3/0/4",
@@ -56,6 +64,8 @@ Connected to border 3/0/3",
     "AP-1":{
 
 	"Role":"Access Point with Fabric support",
+
+	"IP":"10.64.69.160:2014",
 
 	"IP Address":"Console access:\n\ntelnet 10.64.69.160 port: 2014\n\nmac : 18:8B:45:00:5E:B8",
 
@@ -69,6 +79,8 @@ Connected to border 3/0/3",
 
 	"Role":"Access Point with Fabric support",
 
+	"IP":"10.64.69.160:2009",
+	
 	"IP Address":"Console access:\n\ntelnet 10.64.69.160 port: 2009\n\nmac : 00:6B:F1:25:FB:60",
 
 	"Credentials":"",
@@ -78,6 +90,8 @@ Connected to border 3/0/3",
     "APIC-EM":{
 
 	"Role":"DNA-C Network Automation",
+
+	"IP":"",
 
 	"IP Address":"Depends on User APIC-EM installation.",
 
@@ -89,6 +103,8 @@ Connected to border 3/0/3",
     "ME":{
 
 	"Role":"Mobility Express",
+
+	"IP":"9.31.25.101",
 
 	"IP Address":"Console Access:\ntelnet 10.64.69.160 port: 2025\nMgmt. ip : 9.31.25.101\nInternal AP ip : 9.31.25.100\nSSID configured:  SSID1\nCred: cisco/Cisco!123",
 

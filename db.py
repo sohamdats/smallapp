@@ -42,6 +42,7 @@ class DB:
             elements_dict[element]['time'] = time
             
             elements_dict[element]['Role'] = self.decode(self.r.hget(element+'Prop','Role'))
+            elements_dict[element]['IP'] = self.decode(self.r.hget(element+'Prop','IP'))
             elements_dict[element]['IP Address'] = self.specialdecode(self.r.hget(element+'Prop','IP Address'))
             elements_dict[element]['Credentials'] = self.specialdecode(self.r.hget(element+'Prop','Credentials'))
             elements_dict[element]['Device'] = self.specialdecode(self.r.hget(element+'Prop','Device'))
