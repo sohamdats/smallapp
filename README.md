@@ -1,3 +1,5 @@
 # smallapp
 
-docker-compose up
+Run the command 
+
+`<addr>` docker-compose up
