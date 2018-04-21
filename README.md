@@ -1,3 +1,3 @@
 # smallapp
 
-Command: `<docker-compose up>` 
+Command: `docker-compose up` 
