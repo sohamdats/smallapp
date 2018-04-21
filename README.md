@@ -1,0 +1,3 @@
+# smallapp
+
+docker-compose up
